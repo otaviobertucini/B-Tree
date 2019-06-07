@@ -3,8 +3,13 @@
 /*Função para buscar uma chave em uma árvore B:*/
 void imprimir (Arvore *a, int nivel) {
 
+    if(a->n == 0){
+        printf("VAZIA!\n");
+        return;
+    }
+
    int i;
- 
+
    /*Imprime recuo para definir o nível do nó: */
    for (i = 0; i < nivel; i++) { printf("  "); }
 

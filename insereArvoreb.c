@@ -14,6 +14,7 @@ Arvore* dividir_no (Arvore *x, int i, Arvore *y) {
     //Coloca as chaves que estão depois da mediana na nova árvore
     for(int h = 0; h < (2*T-1)/2; h++){
         dir->chaves[h] = y->chaves[h+(2*T-1)/2 + 1];
+        (dir->n)++;
     }
 
     //Movemos os filhos que estavam relacionadas as chaves que foram retiradas
@@ -25,7 +26,10 @@ Arvore* dividir_no (Arvore *x, int i, Arvore *y) {
     }
 
     //Como os elementos foram retirados, diminuir o tamanho da árvore
-    y->n = n-(2*T-1)/2; //TODO: substituir pelo remover?
+    y->n = y->n-(2*T-1)/2; //TODO: substituir pelo remover?
+
+    //TODO: parei aqui! problema: as novas árvores não estão sendo ligadas
+    //com o novo nó que subiu!.
 
     //Agora é necessário "empurrar" todos os filhos do X uma posição para a
     //frente, já que o novo filho vai entrar ali
@@ -46,6 +50,7 @@ Arvore* dividir_no (Arvore *x, int i, Arvore *y) {
     //Agora colocamos a mediana no lugar dela e aumentamos o número de chaves
     //na árvore
     x->chaves[i] = y->chaves[(2*T-1)/2];
+    y->n = y->n-1;
     (x->n)++;
 
    return x;
@@ -53,20 +58,69 @@ Arvore* dividir_no (Arvore *x, int i, Arvore *y) {
 
 /*Descrição: ????*/
 Arvore* inserir_arvore_nao_cheia (Arvore *x, TIPO k) {
-   /*Completar!!!!!!!!!!!!!!*/
-   printf("Completar\n");
+
+    //Se a árvore não for folha
+    if(!x->folha){
+        int i = 0;
+        while(i < x->n && x->chaves[i] < k){
+            i++;
+        }
+
+        //Caso o filho esteja cheio e não for folha, divida
+        if(x->filhos[i]->folha){
+            if(x->filhos[i]->n == 2*T-1){
+                dividir_no(x, i, x->filhos[i]);
+                int filho = x->chaves[i];
+                if(filho > k){
+                    return inserir_arvore_nao_cheia(x->filhos[i], k);
+                }
+            }
+            return inserir_arvore_nao_cheia(x->filhos[i+1], k);
+        }
+        return inserir_arvore_nao_cheia(x->filhos[i], k);
+    }
+
+    //Se a árvore for folha
+
+    //Busca a posição que a nova chave será inserida.
+    int i = 0;
+    if(x->n != 0){
+        while(x->chaves[i] < k && i < x->n){
+            i++;
+        }
+
+        //Desloca as chaves para a direita
+        for(int h = x->n; h > i; h--){
+            x->chaves[h] = x->chaves[h-1];
+        }
+    }
+
+    //Coloca a chave no lugar Desloca
+    x->chaves[i] = k;
+    x->n = x->n + 1;
+
    return x;
 }
 
 /*Função para inserir uma chave em uma árvore B:*/
 Arvore *inserir (Arvore *raiz, TIPO chave) {
    Arvore *r = raiz;
+   imprimir(raiz, 0);
    if (r->n == (2*T - 1)) {
       Arvore *s = criar();
       s->folha = FALSE;
       s->filhos[0] = r;
       s = dividir_no (s, 0, r);
-      s = inserir_arvore_nao_cheia (s, chave);
+      if(s->chaves[0] > chave){
+          s = inserir_arvore_nao_cheia (s->filhos[0], chave);
+          // printf("%d nnn\n", s->filhos[0]->n);
+          // printf("Filhos 0!\n");
+          // imprimir(s->filhos[0], 0);
+          // printf("Filhos 0!\n");
+      }
+      else{
+          s = inserir_arvore_nao_cheia (s->filhos[1], chave);
+      }
       return s;
    }
    else {

@@ -30,7 +30,7 @@ int main () {
    a = inserir (a, 'E');
 
 
-   imprimir (a, 0);
+   // imprimir (a, 0);
 
    printf("Teste!\n");
 
