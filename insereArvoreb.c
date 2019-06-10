@@ -79,6 +79,9 @@ Arvore* inserir_arvore_nao_cheia (Arvore *x, TIPO k) {
                 return x;
             }
         }
+        if(x->filhos[i]->n >= 2*T-1){
+            dividir_no(x, i, x->filhos[i]);
+        }
         x->filhos[i] = inserir_arvore_nao_cheia(x->filhos[i], k);
         return x;
     }
