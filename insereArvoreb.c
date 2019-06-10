@@ -1,7 +1,7 @@
 #include "arvoreb.h"
 
 /*
-x = novo nó
+x = novo nó (onde a chave vai subir)
 y = nó que está cheio
 i = posição da chave no nó x
 */
@@ -28,12 +28,9 @@ Arvore* dividir_no (Arvore *x, int i, Arvore *y) {
     //Como os elementos foram retirados, diminuir o tamanho da árvore
     y->n = y->n-(2*T-1)/2; //TODO: substituir pelo remover?
 
-    //TODO: parei aqui! problema: as novas árvores não estão sendo ligadas
-    //com o novo nó que subiu!.
-
     //Agora é necessário "empurrar" todos os filhos do X uma posição para a
     //frente, já que o novo filho vai entrar ali
-    for(int h = x->n; h > i+1; h--){
+    for(int h = x->n + 1; h > i+1; h--){
         x->filhos[h] = x->filhos[h-1];
     }
 
@@ -72,14 +69,14 @@ Arvore* inserir_arvore_nao_cheia (Arvore *x, TIPO k) {
                 dividir_no(x, i, x->filhos[i]);
                 int filho = x->chaves[i];
                 if(filho > k){
-                    // return inserir_arvore_nao_cheia(x->filhos[i], k);
                     x->filhos[i] = inserir_arvore_nao_cheia(x->filhos[i], k);
                 }
-                // return inserir_arvore_nao_cheia(x->filhos[i+1], k);
-                x->filhos[i+1] = inserir_arvore_nao_cheia(x->filhos[i+1], k);
+                else{
+                    x->filhos[i+1] = inserir_arvore_nao_cheia(x->filhos[i+1], k);
+                }
+                return x;
             }
         }
-        // return inserir_arvore_nao_cheia(x->filhos[i], k);
         x->filhos[i] = inserir_arvore_nao_cheia(x->filhos[i], k);
         return x;
     }
@@ -116,7 +113,6 @@ Arvore *inserir (Arvore *raiz, TIPO chave) {
       s->filhos[0] = r;
       s = dividir_no (s, 0, r);
       if(s->chaves[0] > chave){
-          //Problema: a função não está retornando na árvore certa
           s = inserir_arvore_nao_cheia (s, chave);
       }
       else{
