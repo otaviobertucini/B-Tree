@@ -72,12 +72,16 @@ Arvore* inserir_arvore_nao_cheia (Arvore *x, TIPO k) {
                 dividir_no(x, i, x->filhos[i]);
                 int filho = x->chaves[i];
                 if(filho > k){
-                    return inserir_arvore_nao_cheia(x->filhos[i], k);
+                    // return inserir_arvore_nao_cheia(x->filhos[i], k);
+                    x->filhos[i] = inserir_arvore_nao_cheia(x->filhos[i], k);
                 }
+                // return inserir_arvore_nao_cheia(x->filhos[i+1], k);
+                x->filhos[i+1] = inserir_arvore_nao_cheia(x->filhos[i+1], k);
             }
-            return inserir_arvore_nao_cheia(x->filhos[i+1], k);
         }
-        return inserir_arvore_nao_cheia(x->filhos[i], k);
+        // return inserir_arvore_nao_cheia(x->filhos[i], k);
+        x->filhos[i] = inserir_arvore_nao_cheia(x->filhos[i], k);
+        return x;
     }
 
     //Se a árvore for folha
@@ -105,18 +109,15 @@ Arvore* inserir_arvore_nao_cheia (Arvore *x, TIPO k) {
 /*Função para inserir uma chave em uma árvore B:*/
 Arvore *inserir (Arvore *raiz, TIPO chave) {
    Arvore *r = raiz;
-   imprimir(raiz, 0);
+   // imprimir(raiz, 0);
    if (r->n == (2*T - 1)) {
       Arvore *s = criar();
       s->folha = FALSE;
       s->filhos[0] = r;
       s = dividir_no (s, 0, r);
       if(s->chaves[0] > chave){
-          s = inserir_arvore_nao_cheia (s->filhos[0], chave);
-          // printf("%d nnn\n", s->filhos[0]->n);
-          // printf("Filhos 0!\n");
-          // imprimir(s->filhos[0], 0);
-          // printf("Filhos 0!\n");
+          //Problema: a função não está retornando na árvore certa
+          s = inserir_arvore_nao_cheia (s, chave);
       }
       else{
           s = inserir_arvore_nao_cheia (s->filhos[1], chave);
