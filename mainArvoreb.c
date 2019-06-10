@@ -25,9 +25,9 @@ int main () {
    a = inserir (a, 'B');
    a = inserir (a, 'X');
    a = inserir (a, 'Y');
-   a = inserir (a, 'D');
-   a = inserir (a, 'Z');
-   a = inserir (a, 'E');
+   // a = inserir (a, 'D');
+   // a = inserir (a, 'Z');
+   // a = inserir (a, 'E');
 
 
    imprimir (a, 0);

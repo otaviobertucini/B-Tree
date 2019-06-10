@@ -23,6 +23,8 @@ Arvore* dividir_no (Arvore *x, int i, Arvore *y) {
         for(int h = 0; h < 2*T; h++){
             dir->filhos[h] = y->filhos[h+T];
         }
+
+        dir->folha = FALSE;
     }
 
     //Como os elementos foram retirados, diminuir o tamanho da árvore
@@ -106,7 +108,6 @@ Arvore* inserir_arvore_nao_cheia (Arvore *x, TIPO k) {
 /*Função para inserir uma chave em uma árvore B:*/
 Arvore *inserir (Arvore *raiz, TIPO chave) {
    Arvore *r = raiz;
-   // imprimir(raiz, 0);
    if (r->n == (2*T - 1)) {
       Arvore *s = criar();
       s->folha = FALSE;
