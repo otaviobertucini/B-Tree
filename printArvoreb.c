@@ -16,7 +16,7 @@ void imprimir (Arvore *a, int nivel) {
    /*Imprime as chaves armazenadas no nó: */
    printf("|");
    for (i = 0; i < a->n; i++) {
-      printf("%c|", a->chaves[i]);
+      printf("%d|", a->chaves[i]);
       //printf("%02d|", a->chaves[i]);
    }
    printf("\n");

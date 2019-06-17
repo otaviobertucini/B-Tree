@@ -116,12 +116,9 @@ Arvore *inserir (Arvore *raiz, TIPO chave) {
       s->folha = FALSE;
       s->filhos[0] = r;
       s = dividir_no (s, 0, r);
-      if(s->chaves[0] > chave){
-          s = inserir_arvore_nao_cheia (s, chave);
-      }
-      else{
-          s = inserir_arvore_nao_cheia (s->filhos[1], chave);
-      }
+      printf("----------\n");
+      imprimir(s, 0);
+      s = inserir_arvore_nao_cheia (s, chave);
       return s;
    }
    else {
