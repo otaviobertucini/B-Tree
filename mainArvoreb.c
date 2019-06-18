@@ -57,9 +57,12 @@ int main () {
 
    printf("------------------\n");
 
-   remover(a, 22);
-   remover(a, 8);
-   remover(a, 67);
+   // remover(a, 22);
+   // remover(a, 8);
+   // remover(a, 67);
+   // remover(a, 5);
+   // remover(a, 10);
+   // remover(a, 8);
 
    imprimir (a, 0);
 

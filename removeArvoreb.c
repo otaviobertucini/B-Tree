@@ -13,6 +13,9 @@ Arvore* remover_de_folha (Arvore *a, int index){
             a->chaves[i] = a->chaves[i+1];
         }
     }
+    else{
+        /*Completar Nicolas*/
+    }
 
    return a;
 }
@@ -25,13 +28,15 @@ Arvore* remover_de_nao_folha (Arvore *a, int index){
 
    /*Descrição ...*/
    if (a->filhos[index]->n >= T){
-      /*Completar!!!!*/
-      printf("Completar\n");
+       Arvore* aux = a->filhos[index];
+       a->chaves[index] = aux->chaves[aux->n - 1];
+       remover(aux, aux->chaves[aux->n - 1]);
    }
   /*Descrição ...*/
    else if (a->filhos[index+1]->n >= T){
-      /*Completar!!!!*/
-      printf("Completar\n");
+       Arvore* aux = a->filhos[index+1];
+       a->chaves[index] = aux->chaves[0];
+       remover(aux, aux->chaves[0]);
    }
    /*Descrição ...*/
    else{
@@ -95,9 +100,8 @@ Arvore* remover (Arvore *a, TIPO k){
    else{
       //Se este nó é um nó folha, então a chave não está na árvore
       if (a->folha){
-  	 printf("\nA chave %c não está na árvore.\n",k);
-  	 //printf("\nA chave %d não está na árvore.\n",k);
-         return a;
+  	       printf("\nA chave %c não está na árvore.\n",k);
+           return a;
       }
 
       return remover(a->filhos[index], k);
