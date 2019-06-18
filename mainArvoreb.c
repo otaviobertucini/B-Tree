@@ -53,7 +53,14 @@ int main () {
    a = inserir (a, 21);
    a = inserir (a, 67);
 
-   printf("----------u\n");
+   imprimir (a, 0);
+
+   printf("------------------\n");
+
+   remover(a, 22);
+   remover(a, 8);
+   remover(a, 67);
+
    imprimir (a, 0);
 
    return 0;
