@@ -5,7 +5,7 @@ Arvore* remover_de_folha (Arvore *a, int index){
 
     printf("Remover de folha!\n");
 
-    //Se após a remoção a árvore ainda tiver o tamanho > T-1
+    //Se após a remoção a árvore ainda tiver o tamanho >= T-1
     if(a->n - 1 >= T-1){
         (a->n)--;
 
@@ -13,6 +13,7 @@ Arvore* remover_de_folha (Arvore *a, int index){
             a->chaves[i] = a->chaves[i+1];
         }
     }
+    //Se após a remoção a árvore ainda tiver o tamanho < T-1
     else{
         /*Completar Nicolas*/
     }
@@ -38,9 +39,9 @@ Arvore* remover_de_nao_folha (Arvore *a, int index){
        a->chaves[index] = aux->chaves[0];
        remover(aux, aux->chaves[0]);
    }
-   /*Descrição ...*/
+   /*Quando nenhum dos filhos pode doar um elemento*/
    else{
-       /*Completar!!!!*/
+       /* Nicolas */
        printf("Completar\n");
    }
 

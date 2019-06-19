@@ -101,7 +101,7 @@ Arvore* inserir_arvore_nao_cheia (Arvore *x, TIPO k) {
         }
     }
 
-    //Coloca a chave no lugar Desloca
+    //Coloca a chave no lugar deslocado
     x->chaves[i] = k;
     x->n = x->n + 1;
 
