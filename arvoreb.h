@@ -40,7 +40,7 @@ Arvore* inserir_arvore_nao_cheia (Arvore *x, TIPO k);
 Arvore *inserir (Arvore *raiz, TIPO chave);
 
 /*Descrição ...*/
-Arvore* remover_de_folha (Arvore *a, int index);
+Arvore* remover_de_folha (Arvore *raiz, Arvore *a, TIPO k, int index);
 
 /*Descrição ...*/
 Arvore* remover_de_nao_folha (Arvore *a, int index);
@@ -52,7 +52,7 @@ Arvore *verificar_raiz_vazia (Arvore *raiz);
 int buscar_index_remocao (Arvore *a, TIPO chave);
 
 /*Descrição: ????*/
-Arvore *remover (Arvore *a, TIPO k);
+Arvore *remover (Arvore *r, Arvore *a, TIPO k);
 
 
 #endif
