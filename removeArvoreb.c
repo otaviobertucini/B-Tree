@@ -16,6 +16,8 @@ Arvore* remover_de_folha (Arvore *raiz, Arvore *folha, TIPO k, int index){
         for(int i = index; i < folha->n; i++){
             folha->chaves[i] = folha->chaves[i+1];
         }
+
+        printf("Após remoção elemento %d (caso 1)\n", k);
     }
     //Se após a remoção a árvore tiver o tamanho < T-1
     else{
@@ -91,13 +93,18 @@ Arvore* remover_de_nao_folha (Arvore *a, int index){
    if (a->filhos[index]->n >= T){
        Arvore* aux = a->filhos[index];
        a->chaves[index] = aux->chaves[aux->n - 1];
-       remover(aux,aux, aux->chaves[aux->n - 1]);
+       (aux->n)--;
+       printf("Após remoção elemento %d (caso 2A)\n", k);
    }
   /*Descrição ...*/
    else if (a->filhos[index+1]->n >= T){
        Arvore* aux = a->filhos[index+1];
        a->chaves[index] = aux->chaves[0];
-       remover(aux,aux, aux->chaves[0]);
+       (aux->n)--;
+       for(int i = 0; i < aux->n; i++){
+           aux->chaves[i] = aux->chaves[i+1];
+       }
+       printf("Após remoção elemento %d (caso 2B)\n", k);
    }
    /*Quando nenhum dos filhos pode doar um elemento*/
    else{
@@ -118,6 +125,8 @@ Arvore* remover_de_nao_folha (Arvore *a, int index){
        for(int j = index; j < a->n; j++)
             a->chaves[j] = a->chaves[j+1];
        a->n-=1;
+
+       printf("Após remoção elemento %d (caso 2C)\n", k);
    }
 
    return a;
@@ -131,7 +140,7 @@ Arvore *verificar_raiz_vazia (Arvore *raiz){
     Liberar a raiz antiga*/
 
    /*Completar!!!! */
-   printf("Completar\n");
+   printf("Completara\n");
 
     return raiz;
 }
