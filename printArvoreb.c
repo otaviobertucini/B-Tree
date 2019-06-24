@@ -3,10 +3,10 @@
 /*Função para buscar uma chave em uma árvore B:*/
 void imprimir (Arvore *a, int nivel) {
 
-    if(a->n == 0){
-        printf("VAZIA!\n");
-        return;
-    }
+    // if(a->n == 0){
+    //     printf("VAZIA!\n");
+    //     return;
+    // }
 
    int i;
 
