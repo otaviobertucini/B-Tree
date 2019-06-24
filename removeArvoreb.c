@@ -94,8 +94,23 @@ Arvore* remover_de_nao_folha (Arvore *a, int index){
    }
    /*Quando nenhum dos filhos pode doar um elemento*/
    else{
-       /* Nicolas */
-       printf("Completar\n");
+       int aux = a->filhos[index]->n;
+       int auxIndex = index;
+       a->filhos[index]->n *= 2;
+       for(int j = 0;aux > j; j++)
+            a->filhos[index]->chaves[aux+j] = a->filhos[index+1]->chaves[j];
+
+       int i;
+       for(i = 1; index + i < a->n; i++)
+       {
+                a->filhos[index + i]->n = a->filhos[index+i+1]->n;
+                for(int j = 0; a->filhos[index+i]->n > j; j++)
+                    a->filhos[index+i]->chaves[j] = a->filhos[index+i+1]->chaves[j];
+                }
+       a->filhos[index+i]->n = 0;
+       for(int j = index; j < a->n; j++)
+            a->chaves[j] = a->chaves[j+1];
+       a->n-=1;
    }
 
    return a;
