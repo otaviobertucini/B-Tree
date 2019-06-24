@@ -1,6 +1,12 @@
 #include "arvoreb.h"
 
 /*
+Essa função tem como objetivo dividir uma árvore que está cheia.
+Ela cria um novo nó e "sobe" a mediana dela para a árvore que está acima dela e
+então adiciona a árvore que foi criada a direita do elemento que subiu.
+Todos os elementos e filhos que estavam a direita da mediana são adicionados na
+nova árvore.
+
 x = novo nó (onde a chave vai subir)
 y = nó que está cheio
 i = posição da chave no nó x
@@ -28,7 +34,7 @@ Arvore* dividir_no (Arvore *x, int i, Arvore *y) {
     }
 
     //Como os elementos foram retirados, diminuir o tamanho da árvore
-    y->n = y->n-(2*T-1)/2; //TODO: substituir pelo remover?
+    y->n = y->n-(2*T-1)/2;
 
     //Agora é necessário "empurrar" todos os filhos do X uma posição para a
     //frente, já que o novo filho vai entrar ali
@@ -55,21 +61,34 @@ Arvore* dividir_no (Arvore *x, int i, Arvore *y) {
    return x;
 }
 
-/*Descrição: ????*/
+/*
+O objetivo dessa função é inserir um elemento em um nó da árvore que
+não está cheio.
+x = árvore onde a chave deve ser inserida
+k = chave que deve ser inserida
+*/
 Arvore* inserir_arvore_nao_cheia (Arvore *x, TIPO k) {
 
     //Se a árvore não for folha
     if(!x->folha){
         int i = 0;
+
+        //Busca a posição onde a chave é maior ou igual que a chave que
+        //desejamos inserir
         while(i < x->n && x->chaves[i] < k){
             i++;
         }
 
-        //Caso o filho esteja cheio e não for folha, divida
+        //Caso o filho na posição i seja folha, sabemos que a chave deve ser
+        //inserida nele
         if(x->filhos[i]->folha){
+
+            //Verificamos se o filho está cheio. Caso esteja, divida
             if(x->filhos[i]->n == 2*T-1){
                 dividir_no(x, i, x->filhos[i]);
                 int filho = x->chaves[i];
+                //Após a divisão, verificamos se a chave deve ser inserida
+                //no filho à direita ou à esquerda da chave que subiu
                 if(filho > k){
                     x->filhos[i] = inserir_arvore_nao_cheia(x->filhos[i], k);
                 }
@@ -79,14 +98,18 @@ Arvore* inserir_arvore_nao_cheia (Arvore *x, TIPO k) {
                 return x;
             }
         }
+        //Caso o filho na posição i esteja cheio, devemos dividi-lo para
+        //previnir que uma futura divisão do seus filhos a árvore
+        //em que a mediana subirá esteja cheia
         if(x->filhos[i]->n >= 2*T-1){
             dividir_no(x, i, x->filhos[i]);
         }
+        //Chamamos a função recursivamente para o filho na posição i
         x->filhos[i] = inserir_arvore_nao_cheia(x->filhos[i], k);
         return x;
     }
 
-    //Se a árvore for folha
+    //Se a árvore for folha, apenas adicionamos o elemento novo nela
 
     //Busca a posição que a nova chave será inserida.
     int i = 0;

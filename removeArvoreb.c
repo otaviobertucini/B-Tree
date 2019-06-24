@@ -1,9 +1,15 @@
 #include "arvoreb.h"
 
-/*Descrição ...*/
+/*
+Essa função tem o objetivo de remover um elemento de uma árvore que seja folha.
+Ela verifica como a árvore ficaria após a sua remoção e a partir disso escolhe
+qual o método de remoção a ser utilizado.
+*/
 Arvore* remover_de_folha (Arvore *raiz, Arvore *folha, TIPO k, int index){
 
-    //Se após a remoção a árvore ainda tiver o tamanho >= T-1
+    //Se após a remoção a árvore ainda tiver o tamanho >= T-1, apenas diminuímos
+    //o tamanho da árvore e deslocamos os elementos que estavam após o elemento
+    //removido
     if(folha->n - 1 >= T-1){
         (folha->n)--;
 
@@ -11,9 +17,10 @@ Arvore* remover_de_folha (Arvore *raiz, Arvore *folha, TIPO k, int index){
             folha->chaves[i] = folha->chaves[i+1];
         }
     }
-    //Se após a remoção a árvore ainda tiver o tamanho < T-1
+    //Se após a remoção a árvore tiver o tamanho < T-1
     else{
 
+        /*Nicolas*/
         for(int i = index; i < folha->n; i++){
             folha->chaves[i] = folha->chaves[i+1];
         }
@@ -144,7 +151,7 @@ int buscar_index_remocao (Arvore *a, TIPO chave) {
    return i;
 }
 
-/*Descrição: ????*/
+/*???????????????*/
 Arvore* remover (Arvore *r, Arvore *a, TIPO k){
    int index;
    /*Completar!!!!!!!!!!!!!!*/
