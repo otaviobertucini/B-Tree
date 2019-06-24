@@ -89,12 +89,12 @@ Arvore* test_case_one(Arvore* a){
 /*Função principal:*/
 int main (int argc, char** argv) {
 
-    if(argc == 0){
-        a = test_case_one(a);
-        return 0;        
-    }
-
    Arvore *a = criar();
+
+   if(argc == 1){
+       a = test_case_one(a);
+       return 0;
+   }
 
    if(*argv[1] == '1'){
        a = test_case_one(a);
