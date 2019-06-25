@@ -202,7 +202,6 @@ int buscar_index_remocao (Arvore *a, TIPO chave) {
 qual é a melhor função de remoção para o uso no momento*/
 Arvore* remover (Arvore *r, Arvore *a, TIPO k){
    int index;
-
    if (a == NULL) {
       printf("Arvorê vazia\n");
       return a;

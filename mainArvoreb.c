@@ -14,6 +14,7 @@ Arvore* test_case_two(Arvore* a){
     a = inserir (a, 25);
     a = inserir (a, 36);
 
+    printf("Árvore após inserção: \n");
     printf("------------------\n");
     imprimir (a, 0);
     printf("------------------\n");
@@ -63,6 +64,7 @@ Arvore* test_case_one(Arvore* a){
     a = inserir (a, 67);
     a = inserir (a, 4);
 
+    printf("Árvore após inserção: \n");
     imprimir (a, 0);
 
     printf("------------------\n");
